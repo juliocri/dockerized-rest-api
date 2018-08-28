@@ -2,3 +2,4 @@ api/api
 client/node_modules
 client/node_modules/*
 db/data
+db/data/*
