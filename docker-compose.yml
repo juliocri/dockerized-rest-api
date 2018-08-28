@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: mongo
+    volumes:
+      - ./db/data/:/data/db/
+    ports:
+      - 27017:27017
+
+  api:
+    image: golang
+    environment:
+      - DOCKER_ENV=true
+    volumes:
+      - ./api/:/go/src/api/
+    working_dir: /go/src/api/
+    command: bash -c "go get -v ./... && go run api.go"
+    links:
+      - db
+    depends_on:
+      - db
+    ports:
+      - 3001:3001
+
+  client:
+    image: node
+    environment:
+      - DOCKER_ENV=true
+      - NODE_ENV=development
+    volumes:
+      - ./client/:/client/
+    working_dir: /client/
+    command: bash -c "/usr/local/bin/npm install -g react-scripts && /usr/local/bin/npm install && /usr/local/bin/npm start"
+    links:
+      - api
+    depends_on:
+      - db
+      - api
+    ports:
+      - 3000:3000
