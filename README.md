@@ -8,5 +8,8 @@
 
 ## Installation
 
+* git clone https://github.com/juliocri/dockerized-rest-api
+* cd dockerized-rest-api
+* docker-compose build
 * docker-compose up -d
 * open next url: http://localhost:3000
