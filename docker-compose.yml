@@ -4,7 +4,8 @@ services:
   db:
     image: mongo
     volumes:
-      - ./db/data/:/data/db/
+      - ./db/backup/:/mongo/backup/
+      - ./db/bootstrap.sh:/docker-entrypoint-initdb.d/bootstrap.sh
     ports:
       - 27017:27017
 
