@@ -12,8 +12,6 @@ services:
   go:
     build:
       context: ./api/
-    volumes:
-      - ./api/:/go/src/api/
     links:
       - db
     depends_on:
@@ -22,8 +20,6 @@ services:
   react:
     build:
       context: ./client/
-    volumes:
-      - ./client/:/client/
     links:
       - api
     depends_on:
