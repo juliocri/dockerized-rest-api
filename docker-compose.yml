@@ -9,36 +9,30 @@ services:
     ports:
       - 27017:27017
 
-  go:
+  api:
     build:
       context: ./api/
-    links:
-      - db
-    depends_on:
-      - db
-
-  react:
-    build:
-      context: ./client/
-    links:
-      - api
-    depends_on:
-      - db
-      - api
-
-  api:
-    image: dockerized-rest-api_go
     command: bash -c "/go/src/api/api"
     environment:
       - DOCKER_ENV=true
     ports:
       - 3001:3001
+    links:
+      - db
+    depends_on:
+      - db
 
   client:
-    image: dockerized-rest-api_react
+    build:
+      context: ./client/
+    command: bash -c "npm start"
     environment:
       - DOCKER_ENV=true
       - NODE_ENV=development
-    command: bash -c "npm start"
     ports:
       - 3000:3000
+    links:
+      - api
+    depends_on:
+      - db
+      - api
