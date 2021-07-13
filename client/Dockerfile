@@ -1,4 +1,4 @@
-FROM node
+FROM node:latest
 
 RUN mkdir /client
 COPY ./src /client/src

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mongo
+    image: mongo:latest
     volumes:
       - ./db/backup/:/mongo/backup/
       - ./db/bootstrap.sh:/docker-entrypoint-initdb.d/bootstrap.sh
@@ -12,7 +12,7 @@ services:
   api:
     build:
       context: ./api/
-    command: bash -c "/go/src/api/api"
+    command: api
     environment:
       - DOCKER_ENV=true
     ports:
@@ -25,7 +25,7 @@ services:
   client:
     build:
       context: ./client/
-    command: bash -c "npm start"
+    command: npm start
     environment:
       - DOCKER_ENV=true
       - NODE_ENV=development
