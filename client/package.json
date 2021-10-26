@@ -5,9 +5,11 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1",
+    "react-scripts": "^4.0.3",
     "semantic-ui-css": "2.2",
-    "semantic-ui-react": "0.78.2"
+    "semantic-ui-react": "^2.0.4",
+    "immer": ">=9.0.6",
+    "set-value": ">=4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

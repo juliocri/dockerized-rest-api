@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:alpine AS builder
 
 RUN mkdir /go/src/api
 COPY ./api.go /go/src/api/api.go
@@ -8,4 +8,6 @@ RUN go mod init && \
     go mod tidy && \
     go build api.go
 
-RUN mv /go/src/api/api /bin/api
+FROM alpine:latest
+
+COPY --from=builder /go/src/api/api /bin/api
